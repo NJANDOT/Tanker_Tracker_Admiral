@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: snowflake
+    database: dataexpert_student
+    schema: "{{ env_var('SCHEMA', 'nicolassteel') }}"
+    tables:
+      - name: dk_ais_bronze
+      - name: bronze_sanctions

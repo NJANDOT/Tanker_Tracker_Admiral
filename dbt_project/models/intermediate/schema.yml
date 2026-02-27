@@ -1,0 +1,29 @@
+
+version: 2
+
+models:
+  - name: int_ais_trajectories_audit
+    columns:
+      - name: calc_speed_knots
+        tests:
+          # Warning if speed is suspicious, Error if impossible
+          #- dbt_utils.expression_is_true:
+          #    expression: "< 100"
+          #    config:
+          #      severity: error
+          - dbt_utils.expression_is_true:
+              arguments:
+                expression: "< 40"
+              config:
+                severity: warn
+      - name: delta_time_sec
+        tests:
+          - not_null
+
+  - name: int_ais_trajectories
+    description: "Final Cleaned Trajectories (WAP Published)"
+    columns:
+      - name: mmsi
+        description: "Maritime Mobile Service Identity"
+        tests:
+          - not_null

@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_dk_ais
+    description: "Staging model for Danish Maritime Authority AIS data."
+    columns:
+      - name: mmsi
+        tests:
+          - not_null
+
+  - name: stg_sanctions
+    description: "Staging model for OpenSanctions Maritime targets."
+    columns:
+      - name: sanction_id
+        description: "OpenSanctions ID"
+        tests:
+          - unique
+          - not_null
+      - name: vessel_name
+        tests:
+          - not_null

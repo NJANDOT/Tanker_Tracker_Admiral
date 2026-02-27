@@ -1,0 +1,90 @@
+jaffle_shop:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: aab46027.us-west-2
+
+      # User/password auth (commented out; use key-pair below)
+      # user: "{{ env_var('SNOWFLAKE_USER') }}"
+      # password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+
+      # Key-pair (RSA) auth: path and passphrase from .env (passphrase empty if key unencrypted)
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key_path: "{{ env_var('PRIVATE_KEY_PATH') }}"
+      private_key_passphrase: "{{ env_var('PRIVATE_KEY_PASSPHRASE', '') }}"
+
+      role: ALL_USERS_ROLE
+      database: DATAEXPERT_STUDENT
+      warehouse: COMPUTE_WH
+      schema: "{{ env_var('STUDENT_SCHEMA') }}"
+      threads: 1
+      client_session_keep_alive: False
+      query_tag: "{{ env_var('STUDENT_SCHEMA')}}"
+
+      # optional
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false
+      retry_all: False  # default: false
+      reuse_connections: True # default: True if client_session_keep_alive is False, otherwise None
+
+    prod:
+      type: snowflake
+      account: aab46027.us-west-2
+
+      # User/password auth (commented out; use key-pair below)
+      # user: "{{ env_var('SNOWFLAKE_USER') }}"
+      # password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+
+      # Key-pair (RSA) auth: path and passphrase from .env (passphrase empty if key unencrypted)
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      private_key_path: "{{ env_var('PRIVATE_KEY_PATH') }}"
+      private_key_passphrase: "{{ env_var('PRIVATE_KEY_PASSPHRASE', '') }}"
+
+      role: ALL_USERS_ROLE
+      database: DATAEXPERT_STUDENT
+      warehouse: COMPUTE_WH
+      schema: "{{ env_var('STUDENT_SCHEMA') }}_prod"
+      threads: 1
+      client_session_keep_alive: False
+      query_tag: "{{ env_var('STUDENT_SCHEMA')}}_prod"
+
+      # optional
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false
+      retry_all: False  # default: false
+      reuse_connections: True # default: True if client_session_keep_alive is False, otherwise None
+
+tanker_brew_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      # Hybrid Auth: Password fallback
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'ALL_USERS_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'DATAEXPERT_STUDENT') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      schema: "{{ env_var('SCHEMA', 'NICOLASSTEEL') }}"
+      threads: 4
+      client_session_keep_alive: False
+
+tanker_brew_admiral:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      # Hybrid Auth: Password fallback
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'ALL_USERS_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'DATAEXPERT_STUDENT') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      schema: "{{ env_var('SCHEMA', 'NICOLASSTEEL') }}"
+      threads: 4
+      client_session_keep_alive: False

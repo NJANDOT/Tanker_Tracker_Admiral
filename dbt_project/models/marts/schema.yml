@@ -1,0 +1,13 @@
+
+version: 2
+
+models:
+
+  
+  - name: fct_daily_vessel_activity
+    description: "Published Gold Layer. Only built if staging tests pass."
+    columns:
+      - name: mmsi
+        description: "Maritime Mobile Service Identity"
+        tests:
+            - not_null
