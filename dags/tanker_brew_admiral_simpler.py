@@ -135,7 +135,6 @@ def tanker_brew_admiral_simpler():
             dbt_executable_path=DBT_EXECUTABLE_PATH,
         ),
         render_config=RenderConfig(
-            # Select Gold models (include upstream staging for WAP)
             select=["fct_daily_vessel_activity"],
         ),
         operator_args={"vars": {'target_date': '{{ ds }}'}},
