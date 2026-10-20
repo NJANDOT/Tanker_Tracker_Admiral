@@ -95,7 +95,6 @@ def alert_wrapper(**context):
 def tanker_brew_admiral_simpler():
     
     # --- 1. Ingestion ---
-    # --- 1. Ingestion ---
     download_and_filter_dk_ais_data = PythonOperator(
         task_id='download_and_filter_dk_ais_data',
         python_callable=ingestion_wrapper,
@@ -107,14 +106,13 @@ def tanker_brew_admiral_simpler():
         python_callable=upload_snowflake_wrapper,
     )
 
-    # --- Cosmos Configuration ---
+    # --- Cosmos Configuration et 3. Silver Layer ---
     profile_config = ProfileConfig(
         profile_name="tanker_brew_profile",
         target_name="dev",
         profiles_yml_filepath=os.path.join(DBT_PROJECT_PATH, 'profiles.yml'),
     )
 
-    # --- 3. Silver Layer ---
     step3_silver_layer = DbtTaskGroup(
         group_id="step3_silver_layer",
         project_config=ProjectConfig(DBT_PROJECT_PATH),
